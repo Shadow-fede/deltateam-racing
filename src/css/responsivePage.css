@@ -1,4 +1,8 @@
-/* Media Queries - Mobile */
+/* ============================================
+   RESPONSIVE.CSS - Media Queries
+   ============================================ */
+
+/* Media Queries - Tablet (max-width: 768px) */
 @media (max-width: 768px) {
     .nav-links {
         display: none;
@@ -32,21 +36,13 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
+    /* Banner altezza ridotta su tablet */
     .banner-image {
-        height: 350px;
-    }
-
-    .banner-content h1 {
-        font-size: 2rem;
-    }
-
-    .banner-content p {
-        font-size: 1.2rem;
+        height: 300px;
     }
 }
 
-
-/* Media Queries - Small Mobile */
+/* Media Queries - Small Mobile (max-width: 480px) */
 @media (max-width: 480px) {
     .hero h1 {
         font-size: 1.5rem;
@@ -56,60 +52,18 @@
         padding: 1rem;
     }
 
-    .banner-image {
-        height: 250px;
-    }
-
-    .banner-content h1 {
-        font-size: 1.5rem;
-    }
-
-    .banner-content p {
-        font-size: 1rem;
-    }
-
-/* Banner Image - Opzione 3: Con overlay e testo sovrapposto */
-
-.banner-image {
-    position: relative;
-    width: 100%;
-    height: 500px;
-    overflow: hidden;
-}
-
-.banner-image img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-}
-
-/* Overlay scuro sopra l'immagine */
-.banner-image::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 1;
-}
     .gallery {
         grid-template-columns: 1fr;
     }
+
+    /* Banner altezza ridotta su mobile */
+    .banner-image {
+        height: 200px;
+    }
 }
 
-/* Media Queries - Large Desktop */
+/* Media Queries - Large Desktop (min-width: 1400px) */
 @media (min-width: 1400px) {
-    .hero h1 {
-        font-size: 3rem;
-    }
-
-    .features {
-        grid-template-columns: repeat(4, 1fr);
-    }
-
     .hero h1 {
         font-size: 3rem;
     }
@@ -122,32 +76,4 @@
     .banner-image {
         height: 500px;
     }
-}
-
-/* Banner Image - Opzione 3: Con overlay e testo sovrapposto */
-
-.banner-image {
-    position: relative;
-    width: 100%;
-    height: 500px;
-    overflow: hidden;
-}
-
-.banner-image img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-}
-
-/* Overlay scuro sopra l'immagine */
-.banner-image::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 1;
 }
