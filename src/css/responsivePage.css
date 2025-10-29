@@ -4,6 +4,7 @@
 
 /* Media Queries - Tablet (max-width: 768px) */
 @media (max-width: 768px) {
+    /* Navigazione */
     .nav-links {
         display: none;
         width: 100%;
@@ -20,6 +21,7 @@
         display: block;
     }
 
+    /* Hero Section */
     .hero h1 {
         font-size: 2rem;
     }
@@ -28,52 +30,140 @@
         font-size: 1rem;
     }
 
+    /* Features Grid */
     .features {
         grid-template-columns: 1fr;
     }
 
+    /* Gallery */
     .gallery {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    /* Banner altezza ridotta su tablet */
+    /* Banner - altezza ridotta su tablet */
     .banner-image {
         height: 300px;
+    }
+
+    /* Banner Overlay - altezza ridotta su tablet */
+    .banner-content h1 {
+        font-size: 2rem;
+    }
+
+    .banner-content p {
+        font-size: 1.2rem;
     }
 }
 
 /* Media Queries - Small Mobile (max-width: 480px) */
 @media (max-width: 480px) {
+    /* Hero Section */
     .hero h1 {
         font-size: 1.5rem;
     }
 
+    .hero p {
+        font-size: 0.9rem;
+    }
+
+    /* Container */
     .container {
         padding: 1rem;
     }
 
+    /* Gallery - una colonna su mobile */
     .gallery {
         grid-template-columns: 1fr;
     }
 
-    /* Banner altezza ridotta su mobile */
+    /* Banner - altezza ridotta su mobile */
     .banner-image {
         height: 200px;
+    }
+
+    /* Logo più piccolo */
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    /* Banner Overlay - altezza ridotta su mobile */
+    .banner-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .banner-content p {
+        font-size: 1rem;
+    }
+
+    /* Feature cards padding ridotto */
+    .feature-card {
+        padding: 1.5rem;
     }
 }
 
 /* Media Queries - Large Desktop (min-width: 1400px) */
 @media (min-width: 1400px) {
+    /* Hero Section */
     .hero h1 {
         font-size: 3rem;
     }
 
+    .hero p {
+        font-size: 1.3rem;
+    }
+
+    /* Features Grid - 4 colonne su schermi grandi */
     .features {
         grid-template-columns: repeat(4, 1fr);
     }
 
-    /* Banner più alto su schermi grandi */
+    /* Banner - più alto su schermi grandi */
     .banner-image {
         height: 500px;
+    }
+
+    /* Container più largo */
+    .container {
+        max-width: 1400px;
+    }
+
+    /* Gallery - più colonne */
+    .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+/* Media Queries - Extra Large Desktop (min-width: 1920px) */
+@media (min-width: 1920px) {
+    /* Hero Section */
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+
+    /* Banner - ancora più alto su 4K */
+    .banner-image {
+        height: 600px;
+    }
+
+    /* Container per 4K */
+    .container {
+        max-width: 1600px;
+    }
+}
+
+/* Landscape Mobile - orientamento orizzontale */
+@media (max-height: 500px) and (orientation: landscape) {
+    /* Banner ridotto in landscape */
+    .banner-image {
+        height: 250px;
+    }
+
+    /* Hero ridotto */
+    .hero {
+        padding: 2rem 1rem;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
     }
 }
