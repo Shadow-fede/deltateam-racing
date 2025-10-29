@@ -1,4 +1,33 @@
-name: deploy.yml
+name: Deploy static site from src/ to GitHub Pages
+
 on:
+  push:
+    branches: [ main ]  # oppure "master" se è il tuo branch principale
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Scarica il codice del repository
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2️⃣ Carica la directory "src" come artefatto da pubblicare
+      - name: Upload site files
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./src   # 👈 cartella da pubblicare
+
+      # 3️⃣ Pubblica il sito su GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
