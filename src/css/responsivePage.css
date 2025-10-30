@@ -18,67 +18,25 @@
     }
 
     .menu-toggle {
-        display: block;
+        display: flex;
     }
 
-    /* Hero Section */
-    .hero h1 {
-        font-size: 2rem;
+    /* Main content adjustments */
+    main {
+        padding: 1rem;
     }
 
-    .hero p {
-        font-size: 1rem;
-    }
-
-    /* Features Grid */
-    .features {
-        grid-template-columns: 1fr;
-    }
-
-    /* Gallery */
-    .gallery {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    /* Banner - altezza ridotta su tablet */
-    .banner-image {
-        height: 300px;
-    }
-
-    /* Banner Overlay - altezza ridotta su tablet */
-    .banner-content h1 {
-        font-size: 2rem;
-    }
-
-    .banner-content p {
-        font-size: 1.2rem;
+    /* Logo size adjustment */
+    .logo {
+        font-size: 1.3rem;
     }
 }
 
 /* Media Queries - Small Mobile (max-width: 480px) */
 @media (max-width: 480px) {
-    /* Hero Section */
-    .hero h1 {
-        font-size: 1.5rem;
-    }
-
-    .hero p {
-        font-size: 0.9rem;
-    }
-
-    /* Container */
-    .container {
-        padding: 1rem;
-    }
-
-    /* Gallery - una colonna su mobile */
-    .gallery {
-        grid-template-columns: 1fr;
-    }
-
-    /* Banner - altezza ridotta su mobile */
-    .banner-image {
-        height: 200px;
+    /* Header and footer padding */
+    header, footer {
+        padding: 0.8rem;
     }
 
     /* Logo più piccolo */
@@ -86,84 +44,67 @@
         font-size: 1.2rem;
     }
 
-    /* Banner Overlay - altezza ridotta su mobile */
-    .banner-content h1 {
-        font-size: 1.5rem;
+    /* Main content padding */
+    main {
+        padding: 0.5rem;
     }
 
-    .banner-content p {
-        font-size: 1rem;
-    }
-
-    /* Feature cards padding ridotto */
-    .feature-card {
-        padding: 1.5rem;
+    /* Navigation links */
+    .nav-links {
+        gap: 0.8rem;
     }
 }
 
 /* Media Queries - Large Desktop (min-width: 1400px) */
 @media (min-width: 1400px) {
-    /* Hero Section */
-    .hero h1 {
-        font-size: 3rem;
-    }
-
-    .hero p {
-        font-size: 1.3rem;
-    }
-
-    /* Features Grid - 4 colonne su schermi grandi */
-    .features {
-        grid-template-columns: repeat(4, 1fr);
-    }
-
-    /* Banner - più alto su schermi grandi */
-    .banner-image {
-        height: 500px;
-    }
-
     /* Container più largo */
-    .container {
+    nav {
         max-width: 1400px;
     }
 
-    /* Gallery - più colonne */
-    .gallery {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    /* Logo più grande */
+    .logo {
+        font-size: 1.8rem;
     }
 }
 
 /* Media Queries - Extra Large Desktop (min-width: 1920px) */
 @media (min-width: 1920px) {
-    /* Hero Section */
-    .hero h1 {
-        font-size: 3.5rem;
-    }
-
-    /* Banner - ancora più alto su 4K */
-    .banner-image {
-        height: 600px;
-    }
-
     /* Container per 4K */
-    .container {
+    nav {
         max-width: 1600px;
+    }
+
+    /* Logo più grande */
+    .logo {
+        font-size: 2rem;
     }
 }
 
 /* Landscape Mobile - orientamento orizzontale */
 @media (max-height: 500px) and (orientation: landscape) {
-    /* Banner ridotto in landscape */
-    .banner-image {
-        height: 250px;
+    /* Header ridotto in landscape */
+    header {
+        padding: 0.5rem;
     }
 
-    /* Hero ridotto */
-    .hero {
-        padding: 2rem 1rem;
+    /* Main content ridotto */
+    main {
+        padding: 1rem;
+    }
+}
+
+/* Additional responsive styles for the menu toggle animation */
+@media (max-width: 768px) {
+    .menu-toggle.active span:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
     }
 
-    .hero h1 {
-        font-size: 1.8rem;
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
     }
 }
