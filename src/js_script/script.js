@@ -1,130 +1,174 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const mobileMenu = document.getElementById('mobile-menu');
-    const navLinks = document.querySelector('.nav-links');
+const ResponsiveHandler = (function() {
+    // === CACHE ELEMENTI DOM ===
+    const elements = {
+        mobileMenu: null,
+        navLinks: null,
+        header: null,
+        main: null,
+        footer: null,
+        mainImage: null,
+        backToTop: null
+    };
 
-    // Rilevamento tipo dispositivo e orientamento
-    function detectDeviceAndOrientation() {
-        const isDesktop = window.innerWidth >= 1025;
-        const isVerticalMonitor = isDesktop && window.innerHeight < window.innerWidth;
-        const isPortrait = window.innerHeight > window.innerWidth;
+    // === UTILITÀ ===
+    const utils = {
+        isDesktop: () => window.innerWidth >= 1025,
+        isVerticalPC: () => window.innerWidth >= 1025 && window.innerHeight <= 800,
+        isMobile: () => window.innerWidth <= 768,
+        isPortrait: () => window.innerHeight > window.innerWidth,
 
-        // Aggiungi classi al body per targeting CSS
-        document.body.classList.toggle('desktop', isDesktop);
-        document.body.classList.toggle('vertical-monitor', isVerticalMonitor);
-        document.body.classList.toggle('portrait-mode', isPortrait);
-        document.body.classList.toggle('landscape-mode', !isPortrait);
-
-        console.log('Device Detection:', {
-            width: window.innerWidth,
-            height: window.innerHeight,
-            isDesktop,
-            isVerticalMonitor,
-            isPortrait
-        });
-    }
-
-    // Gestione layout per monitor verticali PC
-    function handleVerticalMonitorLayout() {
-        const isVerticalPC = window.innerWidth >= 1025 && window.innerHeight <= 800;
-
-        if (isVerticalPC) {
-            // Ottimizzazioni specifiche per monitor verticali PC
-            const header = document.querySelector('header');
-            const main = document.querySelector('main');
-            const footer = document.querySelector('footer');
-            const image = document.querySelector('main img');
-
-            // Header più compatto
-            if (header) {
-                header.style.padding = '0.8rem 1.5rem';
-            }
-
-            // Main ottimizzato per altezza ridotta
-            if (main) {
-                main.style.minHeight = 'calc(100vh - 120px)';
-                main.style.display = 'flex';
-                main.style.alignItems = 'center';
-                main.style.justifyContent = 'center';
-            }
-
-            // Immagine ottimizzata
-            if (image) {
-                image.style.maxHeight = '65vh';
-                image.style.objectFit = 'contain';
-            }
-
-            // Footer compatto
-            if (footer) {
-                footer.style.padding = '0.8rem 1.5rem';
-            }
+        debounce: (func, wait) => {
+            let timeout;
+            return function executedFunction(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
         }
+    };
+
+    // === INIZIALIZZAZIONE ELEMENTI ===
+    function cacheElements() {
+        elements.mobileMenu = document.getElementById('mobile-menu');
+        elements.navLinks = document.querySelector('.nav-links');
+        elements.header = document.querySelector('header');
+        elements.main = document.querySelector('main');
+        elements.footer = document.querySelector('footer');
+        elements.mainImage = document.querySelector('main img');
+        elements.backToTop = document.getElementById('back-to-top');
     }
 
-    // Gestione desktop layout
+    // === DEVICE DETECTION ===
+    function updateBodyClasses() {
+        const { isDesktop, isVerticalPC, isPortrait } = utils;
+
+        document.body.classList.toggle('desktop', isDesktop());
+        document.body.classList.toggle('vertical-monitor', isVerticalPC());
+        document.body.classList.toggle('portrait-mode', isPortrait());
+        document.body.classList.toggle('landscape-mode', !isPortrait());
+    }
+
+    // === LAYOUT HANDLERS ===
     function handleDesktopLayout() {
-        if (window.innerWidth >= 1025) {
-            mobileMenu.style.display = 'none';
-            navLinks.style.display = 'flex';
+        if (!utils.isDesktop() || !elements.mobileMenu) return;
 
-            // Aggiungi effetti desktop solo se non è un monitor verticale
-            if (window.innerHeight > 800) {
-                // Smooth hover effects per desktop
-                const navLinks = document.querySelectorAll('.nav-links a');
-                navLinks.forEach(link => {
-                    link.addEventListener('mouseenter', function() {
-                        this.style.transition = 'all 0.3s ease';
-                    });
-                });
+        elements.mobileMenu.style.display = 'none';
+        if (elements.navLinks) {
+            elements.navLinks.style.display = 'flex';
+        }
+    }
+
+    function handleMobileLayout() {
+        if (utils.isDesktop() || !elements.mobileMenu) return;
+
+        elements.mobileMenu.style.display = 'flex';
+        if (elements.navLinks) {
+            elements.navLinks.style.display = utils.isMobile() ? 'none' : 'flex';
+        }
+    }
+
+    function optimizeImage() {
+        if (!elements.mainImage) return;
+
+        const { isVerticalPC, isMobile, isDesktop } = utils;
+        const img = elements.mainImage;
+
+        // Reset stili
+        img.style.maxWidth = '';
+        img.style.maxHeight = '';
+        img.style.objectFit = '';
+
+        if (isVerticalPC()) {
+            img.style.maxWidth = '60%';
+            img.style.maxHeight = '65vh';
+            img.style.objectFit = 'contain';
+        } else if (isMobile()) {
+            img.style.maxHeight = '60vh';
+            img.style.objectFit = 'contain';
+        } else if (isDesktop()) {
+            const width = window.innerWidth;
+            if (width >= 1920) img.style.maxWidth = '50%';
+            else if (width >= 1400) img.style.maxWidth = '60%';
+            else img.style.maxWidth = '70%';
+        }
+    }
+
+    // === MOBILE MENU ===
+    function toggleMobileMenu() {
+        if (!utils.isMobile() || !elements.navLinks) return;
+
+        elements.navLinks.classList.toggle('active');
+        elements.mobileMenu.classList.toggle('active');
+
+        document.body.style.overflow = elements.navLinks.classList.contains('active')
+            ? 'hidden'
+            : '';
+    }
+
+    function closeMobileMenu() {
+        if (!elements.navLinks || !elements.mobileMenu) return;
+
+        elements.navLinks.classList.remove('active');
+        elements.mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // === EVENT HANDLERS ===
+    function setupMobileMenu() {
+        if (!elements.mobileMenu) return;
+
+        elements.mobileMenu.addEventListener('click', toggleMobileMenu);
+
+        // Chiudi menu al click su link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (utils.isMobile()) closeMobileMenu();
+            });
+        });
+
+        // Chiudi menu al click esterno
+        document.addEventListener('click', (e) => {
+            if (!utils.isMobile() || !elements.navLinks) return;
+
+            const clickedInside = elements.navLinks.contains(e.target) ||
+                elements.mobileMenu.contains(e.target);
+
+            if (!clickedInside && elements.navLinks.classList.contains('active')) {
+                closeMobileMenu();
             }
+        });
+    }
+
+    function setupImageLoading() {
+        if (!elements.mainImage) return;
+
+        elements.mainImage.style.opacity = '0';
+        elements.mainImage.style.transition = 'opacity 0.3s ease';
+
+        const showImage = () => elements.mainImage.style.opacity = '1';
+
+        if (elements.mainImage.complete) {
+            showImage();
         } else {
-            mobileMenu.style.display = 'flex';
-            navLinks.style.display = window.innerWidth <= 768 ? 'none' : 'flex';
+            elements.mainImage.addEventListener('load', showImage);
         }
     }
 
-    // Toggle mobile menu
-    if (mobileMenu) {
-        mobileMenu.addEventListener('click', function() {
-            if (window.innerWidth <= 768) {
-                navLinks.classList.toggle('active');
-                mobileMenu.classList.toggle('active');
+    function setupScrollEffects() {
+        if (!elements.header) return;
 
-                if (navLinks.classList.contains('active')) {
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    document.body.style.overflow = '';
-                }
-            }
+        window.addEventListener('scroll', () => {
+            const shadow = window.scrollY > 100
+                ? '0 5px 20px rgba(0,0,0,0.2)'
+                : '0 2px 10px rgba(0,0,0,0.1)';
+
+            elements.header.style.boxShadow = shadow;
         });
     }
 
-    // Close menu when clicking on a link
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', function() {
-            if (window.innerWidth <= 768) {
-                navLinks.classList.remove('active');
-                mobileMenu.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-    });
+    function setupBackToTop() {
+        if (!elements.backToTop) return;
 
-    // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-        if (window.innerWidth <= 768) {
-            const isClickInsideNav = navLinks.contains(event.target) || mobileMenu.contains(event.target);
-            if (!isClickInsideNav && navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                mobileMenu.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        }
-    });
-
-    // Back to top functionality
-    const backToTop = document.getElementById('back-to-top');
-    if (backToTop) {
-        backToTop.addEventListener('click', function(e) {
+        elements.backToTop.addEventListener('click', (e) => {
             e.preventDefault();
             window.scrollTo({
                 top: 0,
@@ -133,93 +177,55 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Gestione ottimizzazione immagini
-    function optimizeImageForDevice() {
-        const mainImage = document.querySelector('main img');
-        if (!mainImage) return;
-
-        const isVerticalPC = window.innerWidth >= 1025 && window.innerHeight <= 800;
-        const isMobile = window.innerWidth <= 480;
-
-        if (isVerticalPC) {
-            mainImage.style.maxWidth = '60%';
-            mainImage.style.maxHeight = '65vh';
-            mainImage.style.objectFit = 'contain';
-        } else if (isMobile) {
-            mainImage.style.maxHeight = '60vh';
-            mainImage.style.objectFit = 'contain';
-        } else {
-            mainImage.style.maxHeight = '';
-            mainImage.style.objectFit = '';
-
-            // Dimensioni desktop normali
-            if (window.innerWidth >= 1920) {
-                mainImage.style.maxWidth = '50%';
-            } else if (window.innerWidth >= 1400) {
-                mainImage.style.maxWidth = '60%';
-            } else if (window.innerWidth >= 1025) {
-                mainImage.style.maxWidth = '70%';
-            } else {
-                mainImage.style.maxWidth = '';
-            }
-        }
-    }
-
-    // Event listeners per resize e orientation change
-    function setupEventListeners() {
-        window.addEventListener('resize', function() {
-            detectDeviceAndOrientation();
+    function setupResizeHandler() {
+        const handleResize = utils.debounce(() => {
+            updateBodyClasses();
             handleDesktopLayout();
-            handleVerticalMonitorLayout();
-            optimizeImageForDevice();
+            handleMobileLayout();
+            optimizeImage();
 
-            // Close mobile menu when resizing to desktop
-            if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                mobileMenu.classList.remove('active');
-                document.body.style.overflow = '';
+            // Chiudi menu mobile su resize a desktop
+            if (!utils.isMobile() && elements.navLinks?.classList.contains('active')) {
+                closeMobileMenu();
             }
-        });
+        }, 150);
 
-        window.addEventListener('orientationchange', function() {
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('orientationchange', () => {
             setTimeout(() => {
-                detectDeviceAndOrientation();
-                handleVerticalMonitorLayout();
-                optimizeImageForDevice();
+                updateBodyClasses();
+                optimizeImage();
             }, 100);
         });
     }
 
-    // Inizializzazione
-    function initialize() {
-        detectDeviceAndOrientation();
+    // === INIZIALIZZAZIONE ===
+    function init() {
+        cacheElements();
+        updateBodyClasses();
         handleDesktopLayout();
-        handleVerticalMonitorLayout();
-        optimizeImageForDevice();
-        setupEventListeners();
+        handleMobileLayout();
+        optimizeImage();
 
-        // Inizializza l'immagine
-        const mainImage = document.querySelector('main img');
-        if (mainImage) {
-            mainImage.style.opacity = '0';
-            mainImage.style.transition = 'opacity 0.3s ease';
-            mainImage.addEventListener('load', function() {
-                this.style.opacity = '1';
-            });
-        }
+        setupMobileMenu();
+        setupImageLoading();
+        setupScrollEffects();
+        setupBackToTop();
+        setupResizeHandler();
     }
 
-    // Scroll effect per header
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (header && window.scrollY > 100) {
-            header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.2)';
-        } else if (header) {
-            header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
-        }
-    });
+    // === PUBLIC API ===
+    return {
+        init: init
+    };
+})();
 
-    // Avvia tutto
-    setTimeout(initialize, 100);
-    window.addEventListener('load', initialize);
-});
+// === AVVIO APPLICAZIONE ===
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', ResponsiveHandler.init);
+} else {
+    ResponsiveHandler.init();
+}
+
+// Backup per window.onload
+window.addEventListener('load', ResponsiveHandler.init);

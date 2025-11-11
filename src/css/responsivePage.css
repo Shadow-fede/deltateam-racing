@@ -1,38 +1,79 @@
-/* ============================================
-   RESPONSIVE.CSS - Media Queries
-   ============================================ */
+/* === VARIABILI CSS === */
+:root {
+    --header-padding: 1.2rem 2rem;
+    --main-padding: 3rem 2rem;
+    --footer-padding: 1.5rem 2rem;
+    --nav-gap: 3rem;
+    --transition-speed: 0.3s;
+}
 
-/* STILI BASE PER DESKTOP (default) */
+/* === BASE DESKTOP (default) === */
+body {
+    font-size: 16px;
+    line-height: 1.7;
+}
 
-/* Media Queries - PC Vertical Monitor (max-height: 800px) and (min-width: 1025px) */
+header {
+    padding: var(--header-padding);
+    transition: box-shadow var(--transition-speed) ease;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.nav-links {
+    gap: var(--nav-gap);
+}
+
+.nav-links a {
+    font-size: 1.1rem;
+    position: relative;
+    padding: 0.5rem 0;
+    transition: all var(--transition-speed) ease;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: white;
+    transition: width var(--transition-speed) ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+main {
+    padding: var(--main-padding);
+    min-height: calc(100vh - 160px);
+}
+
+main img {
+    max-width: 70%;
+    transition: transform var(--transition-speed) ease;
+}
+
+main img:hover {
+    transform: scale(1.02);
+}
+
+footer {
+    padding: var(--footer-padding);
+}
+
+/* === MONITOR VERTICALI PC === */
 @media (min-width: 1025px) and (max-height: 800px) and (orientation: portrait) {
-    /* Ottimizzazioni per monitor verticali (es. monitor ruotati 90°) */
-
-    /* Layout compatto per verticale */
-    body {
-        font-size: 15px;
-        line-height: 1.6;
-    }
-
-    /* Header compatto */
-    header {
-        padding: 0.8rem 1.5rem;
-        position: relative; /* Rimuove sticky per salvare spazio */
-    }
-
-    .logo {
-        font-size: 1.4rem;
-    }
-
-    .nav-links {
-        gap: 2rem;
-    }
-
-    .nav-links a {
-        font-size: 1rem;
-    }
-
-    /* Main content ottimizzato per altezza ridotta */
+    body { font-size: 15px; line-height: 1.6; }
+    header { padding: 0.8rem 1.5rem; position: relative; }
+    .logo { font-size: 1.4rem; }
+    .nav-links { gap: 2rem; }
+    .nav-links a { font-size: 1rem; }
     main {
         padding: 1.5rem 2rem;
         min-height: calc(100vh - 120px);
@@ -40,282 +81,71 @@
         align-items: center;
         justify-content: center;
     }
-
-    main img {
-        max-width: 60%;
-        max-height: 65vh;
-        object-fit: contain;
-    }
-
-    /* Footer compatto */
-    footer {
-        padding: 0.8rem 1.5rem;
-    }
-
-    footer .nav-links a {
-        font-size: 1rem;
-    }
+    main img { max-width: 60%; max-height: 65vh; object-fit: contain; }
+    footer { padding: 0.8rem 1.5rem; }
 }
 
-/* Media Queries - PC Vertical Monitor Small (max-height: 600px) and (min-width: 1025px) */
 @media (min-width: 1025px) and (max-height: 600px) and (orientation: portrait) {
-    /* Ottimizzazioni per monitor verticali molto corti */
-
-    body {
-        font-size: 14px;
-    }
-
-    header {
-        padding: 0.6rem 1rem;
-    }
-
-    .logo {
-        font-size: 1.2rem;
-    }
-
-    .nav-links {
-        gap: 1.5rem;
-    }
-
-    .nav-links a {
-        font-size: 0.9rem;
-    }
-
-    main {
-        padding: 1rem 1.5rem;
-        min-height: calc(100vh - 100px);
-    }
-
-    main img {
-        max-width: 50%;
-        max-height: 55vh;
-    }
-
-    footer {
-        padding: 0.6rem 1rem;
-    }
+    body { font-size: 14px; }
+    header { padding: 0.6rem 1rem; }
+    .logo { font-size: 1.2rem; }
+    .nav-links { gap: 1.5rem; }
+    .nav-links a { font-size: 0.9rem; }
+    main { padding: 1rem 1.5rem; min-height: calc(100vh - 100px); }
+    main img { max-width: 50%; max-height: 55vh; }
+    footer { padding: 0.6rem 1rem; }
 }
 
-/* Media Queries - PC Vertical Monitor Ultra Short (max-height: 400px) and (min-width: 1025px) */
 @media (min-width: 1025px) and (max-height: 400px) and (orientation: portrait) {
-    /* Ottimizzazioni estreme per monitor verticali ultra corti */
-
-    body {
-        font-size: 13px;
-    }
-
-    header {
-        padding: 0.4rem 0.8rem;
-    }
-
-    .logo {
-        font-size: 1.1rem;
-    }
-
-    .nav-links {
-        gap: 1rem;
-    }
-
-    main {
-        padding: 0.5rem 1rem;
-        min-height: calc(100vh - 80px);
-    }
-
-    main img {
-        max-width: 45%;
-        max-height: 45vh;
-    }
-
-    footer {
-        padding: 0.4rem 0.8rem;
-    }
+    body { font-size: 13px; }
+    header { padding: 0.4rem 0.8rem; }
+    .logo { font-size: 1.1rem; }
+    .nav-links { gap: 1rem; }
+    main { padding: 0.5rem 1rem; min-height: calc(100vh - 80px); }
+    main img { max-width: 45%; max-height: 45vh; }
+    footer { padding: 0.4rem 0.8rem; }
 }
 
-/* Media Queries - PC Desktop Orizzontale (min-width: 1025px) */
-@media (min-width: 1025px) and (orientation: landscape) {
-    /* Stili desktop standard orizzontali */
-
-    body {
-        font-size: 16px;
-        line-height: 1.7;
-    }
-
-    header {
-        padding: 1.2rem 2rem;
-    }
-
-    .logo {
-        font-size: 1.8rem;
-        font-weight: 700;
-    }
-
-    .nav-links {
-        gap: 3rem;
-    }
-
-    .nav-links a {
-        font-size: 1.1rem;
-        position: relative;
-        padding: 0.5rem 0;
-    }
-
-    .nav-links a::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: white;
-        transition: width 0.3s ease;
-    }
-
-    .nav-links a:hover::after {
-        width: 100%;
-    }
-
-    main {
-        padding: 3rem 2rem;
-        min-height: calc(100vh - 160px);
-    }
-
-    main img {
-        max-width: 70%;
-        transition: transform 0.3s ease;
-    }
-
-    main img:hover {
-        transform: scale(1.02);
-    }
-
-    footer {
-        padding: 1.5rem 2rem;
-    }
-
-    footer .nav-links a {
-        font-size: 1.1rem;
-    }
-}
-
-/* Media Queries - Large Desktop (min-width: 1400px) */
+/* === DESKTOP GRANDI === */
 @media (min-width: 1400px) {
-    /* Container più largo */
-    nav {
-        max-width: 1400px;
-    }
-
-    /* Logo più grande */
-    .logo {
-        font-size: 2rem;
-    }
-
-    /* Navigation più spaziata */
-    .nav-links {
-        gap: 4rem;
-    }
-
-    .nav-links a {
-        font-size: 1.2rem;
-    }
-
-    /* Immagine più grande su desktop */
-    main img {
-        max-width: 60%;
-    }
-
-    /* Main content più spazioso */
-    main {
-        padding: 4rem 2rem;
-    }
+    nav { max-width: 1400px; }
+    .logo { font-size: 2rem; }
+    .nav-links { gap: 4rem; }
+    .nav-links a { font-size: 1.2rem; }
+    main { padding: 4rem 2rem; }
+    main img { max-width: 60%; }
 }
 
-/* Media Queries - Extra Large Desktop (min-width: 1920px) */
 @media (min-width: 1920px) {
-    /* Container per 4K */
-    nav {
-        max-width: 1600px;
-    }
-
-    /* Logo più grande */
-    .logo {
-        font-size: 2.2rem;
-    }
-
-    /* Immagine ottimizzata per 4K */
-    main img {
-        max-width: 50%;
-    }
-
-    /* Main content per schermi grandi */
-    main {
-        padding: 5rem 2rem;
-    }
-
-    /* Font size aumentato per leggibilità */
-    body {
-        font-size: 18px;
-    }
-
-    .nav-links a {
-        font-size: 1.3rem;
-    }
+    body { font-size: 18px; }
+    nav { max-width: 1600px; }
+    .logo { font-size: 2.2rem; }
+    .nav-links a { font-size: 1.3rem; }
+    main { padding: 5rem 2rem; }
+    main img { max-width: 50%; }
 }
 
-/* Media Queries - Ultra Wide Desktop (min-width: 2560px) */
 @media (min-width: 2560px) {
-    /* Container per schermi ultra wide */
-    nav {
-        max-width: 2000px;
-    }
-
-    /* Logo più grande */
-    .logo {
-        font-size: 2.5rem;
-    }
-
-    /* Immagine ottimizzata per ultra wide */
-    main img {
-        max-width: 40%;
-    }
-
-    /* Main content per schermi ultra wide */
-    main {
-        padding: 6rem 2rem;
-    }
-
-    /* Navigation ultra wide */
-    .nav-links {
-        gap: 5rem;
-    }
-
-    .nav-links a {
-        font-size: 1.4rem;
-    }
+    nav { max-width: 2000px; }
+    .logo { font-size: 2.5rem; }
+    .nav-links { gap: 5rem; }
+    .nav-links a { font-size: 1.4rem; }
+    main { padding: 6rem 2rem; }
+    main img { max-width: 40%; }
 }
 
-/* Media Queries - Tablet (max-width: 1024px) */
+/* === TABLET === */
 @media (max-width: 1024px) {
-    /* Transizione da desktop a tablet */
-    .logo {
-        font-size: 1.6rem;
-    }
-
-    .nav-links {
-        gap: 2rem;
-    }
-
-    main img {
-        max-width: 80%;
-    }
-
-    main {
-        padding: 2.5rem 1.5rem;
-    }
+    .logo { font-size: 1.6rem; }
+    .nav-links { gap: 2rem; }
+    main { padding: 2.5rem 1.5rem; }
+    main img { max-width: 80%; }
 }
 
-/* Media Queries - Tablet (max-width: 768px) */
 @media (max-width: 768px) {
-    /* Navigazione */
+    header { padding: 1rem; }
+    .logo { font-size: 1.4rem; }
+
     .nav-links {
         display: none;
         width: 100%;
@@ -324,159 +154,84 @@
         margin-top: 1rem;
     }
 
-    .nav-links.active {
-        display: flex;
-    }
+    .nav-links.active { display: flex; }
+    .menu-toggle { display: flex; }
 
-    .menu-toggle {
-        display: flex;
-    }
+    main { padding: 2rem 1rem; }
+    footer nav { padding: 0.5rem 0; }
 
-    /* Main content adjustments */
-    main {
-        padding: 2rem 1rem;
+    /* Animazione hamburger */
+    .menu-toggle.active span:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
     }
-
-    /* Logo size adjustment */
-    .logo {
-        font-size: 1.4rem;
-    }
-
-    /* Footer adjustments */
-    footer nav {
-        padding: 0.5rem 0;
-    }
-
-    /* Header adjustments for tablet */
-    header {
-        padding: 1rem;
+    .menu-toggle.active span:nth-child(2) { opacity: 0; }
+    .menu-toggle.active span:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
     }
 }
 
-/* Media Queries - Small Mobile (max-width: 480px) */
+/* === MOBILE === */
 @media (max-width: 480px) {
-    /* Header and footer padding */
-    header, footer {
-        padding: 0.8rem;
-    }
-
-    /* Logo più piccolo */
-    .logo {
-        font-size: 1.2rem;
-    }
-
-    /* Main content padding */
-    main {
-        padding: 1.5rem 0.5rem;
-    }
-
-    /* Navigation links */
-    .nav-links {
-        gap: 0.8rem;
-    }
-
-    /* Footer adjustments */
-    footer nav {
-        padding: 0.3rem 0;
-    }
-
-    /* Image optimization for mobile */
-    main img {
-        max-height: 60vh;
-        object-fit: contain;
-    }
+    header, footer { padding: 0.8rem; }
+    .logo { font-size: 1.2rem; }
+    main { padding: 1.5rem 0.5rem; }
+    .nav-links { gap: 0.8rem; }
+    footer nav { padding: 0.3rem 0; }
+    main img { max-height: 60vh; object-fit: contain; }
 }
 
-/* Media Queries - Mobile Portrait (max-width: 480px) and (orientation: portrait) */
+/* Mobile Portrait */
 @media (max-width: 480px) and (orientation: portrait) {
-    /* Specifiche per telefono in verticale */
-    body {
-        font-size: 14px;
-    }
-
-    /* Header più compatto in verticale */
-    header {
-        padding: 0.6rem;
-    }
-
-    /* Logo più compatto */
-    .logo {
-        font-size: 1.1rem;
-    }
-
-    /* Main content più compatto */
+    body { font-size: 14px; }
+    header { padding: 0.6rem; }
+    .logo { font-size: 1.1rem; }
     main {
         padding: 1rem 0.5rem;
         min-height: calc(100vh - 120px);
     }
-
-    /* Immagine ottimizzata per verticale */
     main img {
         max-width: 95%;
         max-height: 50vh;
         width: auto;
         margin: 0 auto;
     }
-
-    /* Footer più compatto */
     footer {
         padding: 0.6rem;
         min-height: 50px;
     }
-
-    /* Navigation mobile in portrait */
     .nav-links {
         max-height: 60vh;
         overflow-y: auto;
     }
-
-    .nav-links li {
-        padding: 0.8rem 0;
-    }
-
-    /* Menu toggle più piccolo */
-    .menu-toggle {
-        padding: 3px;
-    }
-
+    .nav-links li { padding: 0.8rem 0; }
+    .menu-toggle { padding: 3px; }
     .menu-toggle span {
         width: 20px;
         height: 2px;
     }
 }
 
-/* Media Queries - Mobile Landscape (max-width: 768px) and (orientation: landscape) */
+/* Mobile Landscape */
 @media (max-width: 768px) and (orientation: landscape) {
-    /* Header ridotto in landscape */
-    header {
-        padding: 0.4rem 1rem;
-    }
-
-    /* Main content ridotto in landscape */
+    header { padding: 0.4rem 1rem; }
     main {
         padding: 0.5rem;
         min-height: calc(100vh - 80px);
     }
-
-    /* Immagine ottimizzata per landscape */
     main img {
         max-height: 70vh;
         max-width: 90%;
     }
-
-    /* Footer ridotto */
-    footer {
-        padding: 0.4rem;
-    }
-
-    /* Navigation mobile in landscape */
+    footer { padding: 0.4rem; }
     .nav-links {
         max-height: 50vh;
         overflow-y: auto;
     }
 }
 
-/* High DPI/Retina Displays */
+/* === PREFERENZE SISTEMA === */
+
+/* High DPI/Retina */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     main img {
         image-rendering: -webkit-optimize-contrast;
@@ -484,7 +239,7 @@
     }
 }
 
-/* Dark Mode Support */
+/* Dark Mode */
 @media (prefers-color-scheme: dark) {
     body {
         background-color: #0a0a0a;
@@ -494,33 +249,17 @@
 
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
-    * {
+    *,
+    *::before,
+    *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
     }
-
-    main img:hover {
-        transform: none;
-    }
+    main img:hover { transform: none; }
 }
 
-/* Additional responsive styles */
-@media (max-width: 768px) {
-    .menu-toggle.active span:nth-child(1) {
-        transform: rotate(-45deg) translate(-5px, 6px);
-    }
-
-    .menu-toggle.active span:nth-child(2) {
-        opacity: 0;
-    }
-
-    .menu-toggle.active span:nth-child(3) {
-        transform: rotate(45deg) translate(-5px, -6px);
-    }
-}
-
-/* Safe area insets */
+/* === SAFE AREA INSETS === */
 @supports(padding: max(0px)) {
     @media (max-width: 480px) and (orientation: portrait) {
         header {
@@ -528,13 +267,11 @@
             padding-right: max(0.8rem, env(safe-area-inset-right));
             padding-top: max(0.6rem, env(safe-area-inset-top));
         }
-
         footer {
             padding-left: max(0.8rem, env(safe-area-inset-left));
             padding-right: max(0.8rem, env(safe-area-inset-right));
             padding-bottom: max(0.6rem, env(safe-area-inset-bottom));
         }
-
         main {
             padding-left: max(0.5rem, env(safe-area-inset-left));
             padding-right: max(0.5rem, env(safe-area-inset-right));
