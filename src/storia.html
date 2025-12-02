@@ -2,9 +2,75 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Our Story - Delta Team</title>
+    <link rel="stylesheet" href="css/story.css">
+    <link rel="stylesheet" href="css/responsivePage.css">
 </head>
 <body>
+<!-- Header -->
+<header>
+    <nav>
+        <div class="logo">Delta Team Racing</div>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="stem_racing.html">About</a></li>
+            <li><a href="social.html">Social</a></li>
+            <li><a href="sponsor.html">Sponsor</a></li>
+        </ul>
+    </nav>
+</header>
 
+<section class="hero-section">
+
+    <!-- Contenuto principale -->
+    <div class="content-wrapper">
+        <div class="text-content">
+            <h1 class="main-title">Discover<br>Our Story</h1>
+        </div>
+
+        <div class="image-container">
+            <a href="stem_racing.html" class="image-link">
+                <div class="image-frame">
+                    <div class="image-inner">
+                        <img src="image/team_racing.jpg" alt="Delta Team Racing" class="team-image">
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="stem_racing.html">About</a></li>
+            <li><a href="social.html">Social</a></li>
+            <li><a href="sponsor.html">Sponsor</a></li>
+        </ul>
+    </nav>
+</footer>
+
+<script>
+    // Menu hamburger toggle
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+            });
+        }
+    });
+</script>
 </body>
 </html>
