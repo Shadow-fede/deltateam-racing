@@ -112,9 +112,8 @@ nav {
 footer {
     background: linear-gradient(135deg, #75133b 0%, #030061 100%);
     color: white;
-    padding: 1.5rem;
+    padding: 1rem;
     margin-top: auto;
-    border-top: rgba(255, 255, 255, 0.1) solid 2px;
 }
 
 footer nav {
@@ -144,6 +143,7 @@ footer .nav-links a {
     height: 100%;
     padding: 0.5rem 0;
 }
+
 
 /* Header con logo - RIMOSSO */
 .header-logo {
