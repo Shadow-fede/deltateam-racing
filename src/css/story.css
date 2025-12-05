@@ -12,8 +12,6 @@ body {
     min-height: 100vh;
 }
 
-/* Sfondo applicato alla hero-section */
-
 /* Header */
 header {
     background: linear-gradient(135deg, #75133b 0%, #030061 100%);
@@ -73,15 +71,18 @@ nav {
 }
 
 .hero-section {
-    min-height: calc(100vh - 200px);
+    min-height: 100vh;
     background-image: url('../image/background_steamRacing.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: scroll;
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 2rem;
+    padding-top: 4rem;
     overflow: hidden;
     flex: 1;
 }
@@ -182,7 +183,7 @@ footer .nav-links a {
     justify-content: space-between;
     width: 100%;
     max-width: 1400px;
-    margin: 0 auto;
+    margin: -8rem auto 0;
     gap: 4rem;
 }
 
