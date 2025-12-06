@@ -178,7 +178,8 @@ body::before {
     }
 
     .social-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        /*grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));*/
+        grid-template-columns: 1fr;
         gap: 1.5rem;
     }
 
@@ -193,6 +194,7 @@ body::before {
     }
 }
 
+/*
 @media (max-width: 480px) {
     .social-content h1 {
         font-size: 2rem;
@@ -209,4 +211,4 @@ body::before {
     .social-grid {
         grid-template-columns: 1fr 1fr;
     }
-}
+}*/
