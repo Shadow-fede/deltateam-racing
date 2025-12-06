@@ -63,4 +63,7 @@ body {
   }
 }
 
-
+@media (max-width: 768px) {
+    body { background-image: url("../image/sfondo-mobile.jpg");
+    }
+}
