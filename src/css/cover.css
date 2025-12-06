@@ -59,7 +59,7 @@ body {
 /* Immagine mobile (schermi sotto i 768px) */
 @media (max-width: 768px) {
   body {
-    background-image: url("../img/sfondo-mobile.jpg");
+    background-image: url("../image/sfondo-mobile.jpg");
   }
 }
 
