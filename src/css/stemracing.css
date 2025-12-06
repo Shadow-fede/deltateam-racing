@@ -210,3 +210,11 @@ body::before {
         grid-template-columns: 1fr 1fr;
     }
 }
+
+.image-content img {
+    width: 100%;
+    height: auto;
+    max-width: 500px; /* limita la larghezza massima */
+    object-fit: cover; /* mantiene le proporzioni */
+    border-radius: 10px; /* opzionale: angoli arrotondati */
+}
